@@ -556,7 +556,7 @@ aliases:
     working_directory: ~/node-webrtc
 
     macos:
-      xcode: "9.3.1"
+      xcode: "12.5.0"
 
   install-node-darwin: &install-node-darwin
     run:
@@ -686,6 +686,14 @@ jobs:
   build-darwin-x86_64-node-8-release:
     <<: *build-darwin-x86_64
     <<: *node-8-release
+  
+  build-darwin-arm64-node-8-debug:
+    <<: *build-darwin-x86_64
+    <<: *node-8-arm64-debug
+
+  build-darwin-arm64-node-8-release:
+    <<: *build-darwin-x86_64
+    <<: *node-8-arm64-release
 
   test-linux-x86_64-node-8-debug:
     <<: *test-linux-x86_64
@@ -719,6 +727,14 @@ jobs:
     <<: *test-darwin-x86_64
     <<: *node-8-release
 
+  test-darwin-arm64-node-8-debug:
+    <<: *test-darwin-x86_64
+    <<: *node-8-arm64-debug
+
+  test-darwin-arm64-node-8-release:
+    <<: *test-darwin-x86_64
+    <<: *node-8-arm64-release
+
   test-linux-x86_64-node-10-debug:
     <<: *test-linux-x86_64
     <<: *node-10-debug
@@ -750,6 +766,14 @@ jobs:
   test-darwin-x86_64-node-10-release:
     <<: *test-darwin-x86_64
     <<: *node-10-release
+
+  test-darwin-arm64-node-10-debug:
+    <<: *test-darwin-x86_64
+    <<: *node-10-arm64-debug
+
+  test-darwin-arm64-node-10-release:
+    <<: *test-darwin-x86_64
+    <<: *node-10-arm64-release
 
   test-linux-x86_64-node-11-debug:
     <<: *test-linux-x86_64
@@ -783,6 +807,14 @@ jobs:
     <<: *test-darwin-x86_64
     <<: *node-11-release
 
+  test-darwin-arm64-node-11-debug:
+    <<: *test-darwin-x86_64
+    <<: *node-11-arm64-debug
+
+  test-darwin-arm64-node-11-release:
+    <<: *test-darwin-x86_64
+    <<: *node-11-arm64-release
+
   test-linux-x86_64-node-12-debug:
     <<: *test-linux-x86_64
     <<: *node-12-debug
@@ -814,6 +846,14 @@ jobs:
   test-darwin-x86_64-node-12-release:
     <<: *test-darwin-x86_64
     <<: *node-12-release
+
+  test-darwin-arm64-node-12-debug:
+    <<: *test-darwin-x86_64
+    <<: *node-12-arm64-debug
+
+  test-darwin-arm64-node-12-release:
+    <<: *test-darwin-x86_64
+    <<: *node-12-arm64-release
 
   test-linux-x86_64-node-13-debug:
     <<: *test-linux-x86_64
@@ -847,6 +887,14 @@ jobs:
     <<: *test-darwin-x86_64
     <<: *node-13-release
 
+  test-darwin-arm64-node-13-debug:
+    <<: *test-darwin-x86_64
+    <<: *node-13-arm64-debug
+
+  test-darwin-arm64-node-13-release:
+    <<: *test-darwin-x86_64
+    <<: *node-13-arm64-release
+
   test-linux-x86_64-node-14-debug:
     <<: *test-linux-x86_64
     <<: *node-14-debug
@@ -878,6 +926,14 @@ jobs:
   test-darwin-x86_64-node-14-release:
     <<: *test-darwin-x86_64
     <<: *node-14-release
+  
+  test-darwin-arm64-node-14-debug:
+    <<: *test-darwin-x86_64
+    <<: *node-14-arm64-debug
+
+  test-darwin-arm64-node-14-release:
+    <<: *test-darwin-x86_64
+    <<: *node-14-arm64-release
 
   publish-linux-x86_64-node-8-debug:
     <<: *publish-linux-x86_64
@@ -911,6 +967,14 @@ jobs:
     <<: *publish-darwin-x86_64
     <<: *node-8-release
 
+  publish-darwin-arm64-node-8-debug:
+    <<: *publish-darwin-x86_64
+    <<: *node-8-arm64-debug
+
+  publish-darwin-arm64-node-8-release:
+    <<: *publish-darwin-x86_64
+    <<: *node-8-arm64-release
+
 workflows:
   version: 2
   build:
@@ -923,6 +987,8 @@ workflows:
       - build-linux-arm64-node-8-release
       - build-darwin-x86_64-node-8-debug
       - build-darwin-x86_64-node-8-release
+      - build-darwin-arm64-node-8-debug
+      - build-darwin-arm64-node-8-release
 
       - test-linux-x86_64-node-8-debug:    { requires: [build-linux-x86_64-node-8-debug] }
       - test-linux-x86_64-node-8-release:  { requires: [build-linux-x86_64-node-8-release] }
@@ -932,6 +998,8 @@ workflows:
       - test-linux-arm64-node-8-release:   { requires: [build-linux-arm64-node-8-release] }
       - test-darwin-x86_64-node-8-debug:   { requires: [build-darwin-x86_64-node-8-debug] }
       - test-darwin-x86_64-node-8-release: { requires: [build-darwin-x86_64-node-8-release] }
+      - test-darwin-arm64-node-8-debug:   { requires: [build-darwin-arm64-node-8-debug] }
+      - test-darwin-arm64-node-8-release: { requires: [build-darwin-arm64-node-8-release] }
 
       - test-linux-x86_64-node-10-debug:    { requires: [build-linux-x86_64-node-8-debug] }
       - test-linux-x86_64-node-10-release:  { requires: [build-linux-x86_64-node-8-release] }
@@ -941,6 +1009,8 @@ workflows:
       - test-linux-arm64-node-10-release:   { requires: [build-linux-arm64-node-8-release] }
       - test-darwin-x86_64-node-10-debug:   { requires: [build-darwin-x86_64-node-8-debug] }
       - test-darwin-x86_64-node-10-release: { requires: [build-darwin-x86_64-node-8-release] }
+      - test-darwin-arm64-node-10-debug:   { requires: [build-darwin-arm64-node-8-debug] }
+      - test-darwin-arm64-node-10-release: { requires: [build-darwin-arm64-node-8-release] }
 
       - test-linux-x86_64-node-11-debug:    { requires: [build-linux-x86_64-node-8-debug] }
       - test-linux-x86_64-node-11-release:  { requires: [build-linux-x86_64-node-8-release] }
@@ -950,6 +1020,8 @@ workflows:
       - test-linux-arm64-node-11-release:   { requires: [build-linux-arm64-node-8-release] }
       - test-darwin-x86_64-node-11-debug:   { requires: [build-darwin-x86_64-node-8-debug] }
       - test-darwin-x86_64-node-11-release: { requires: [build-darwin-x86_64-node-8-release] }
+      - test-darwin-arm64-node-11-debug:   { requires: [build-darwin-arm64-node-8-debug] }
+      - test-darwin-arm64-node-11-release: { requires: [build-darwin-arm64-node-8-release] }
 
       - test-linux-x86_64-node-12-debug:    { requires: [build-linux-x86_64-node-8-debug] }
       - test-linux-x86_64-node-12-release:  { requires: [build-linux-x86_64-node-8-release] }
@@ -959,6 +1031,8 @@ workflows:
       - test-linux-arm64-node-12-release:   { requires: [build-linux-arm64-node-8-release] }
       - test-darwin-x86_64-node-12-debug:   { requires: [build-darwin-x86_64-node-8-debug] }
       - test-darwin-x86_64-node-12-release: { requires: [build-darwin-x86_64-node-8-release] }
+      - test-darwin-arm64-node-12-debug:   { requires: [build-darwin-arm64-node-8-debug] }
+      - test-darwin-arm64-node-12-release: { requires: [build-darwin-arm64-node-8-release] }
 
       - test-linux-x86_64-node-13-debug:    { requires: [build-linux-x86_64-node-8-debug] }
       - test-linux-x86_64-node-13-release:  { requires: [build-linux-x86_64-node-8-release] }
@@ -968,6 +1042,8 @@ workflows:
       - test-linux-arm64-node-13-release:   { requires: [build-linux-arm64-node-8-release] }
       - test-darwin-x86_64-node-13-debug:   { requires: [build-darwin-x86_64-node-8-debug] }
       - test-darwin-x86_64-node-13-release: { requires: [build-darwin-x86_64-node-8-release] }
+      - test-darwin-arm64-node-13-debug:   { requires: [build-darwin-arm64-node-8-debug] }
+      - test-darwin-arm64-node-13-release: { requires: [build-darwin-arm64-node-8-release] }
 
       - test-linux-x86_64-node-14-debug:    { requires: [build-linux-x86_64-node-8-debug] }
       - test-linux-x86_64-node-14-release:  { requires: [build-linux-x86_64-node-8-release] }
@@ -977,6 +1053,9 @@ workflows:
       - test-linux-arm64-node-14-release:   { requires: [build-linux-arm64-node-8-release] }
       - test-darwin-x86_64-node-14-debug:   { requires: [build-darwin-x86_64-node-8-debug] }
       - test-darwin-x86_64-node-14-release: { requires: [build-darwin-x86_64-node-8-release] }
+      - test-darwin-arm64-node-14-debug:   { requires: [build-darwin-arm64-node-8-debug] }
+      - test-darwin-arm64-node-14-release: { requires: [build-darwin-arm64-node-8-release] }
+
 
       - publish-linux-x86_64-node-8-debug:
           requires:
@@ -1049,3 +1128,21 @@ workflows:
             - test-darwin-x86_64-node-12-release
             - test-darwin-x86_64-node-13-release
             - test-darwin-x86_64-node-14-release
+
+      - publish-darwin-arm64-node-8-debug:
+          requires:
+            - test-darwin-arm64-node-8-debug
+            - test-darwin-arm64-node-10-debug
+            - test-darwin-arm64-node-11-debug
+            - test-darwin-arm64-node-12-debug
+            - test-darwin-arm64-node-13-debug
+            - test-darwin-arm64-node-14-debug
+
+      - publish-darwin-arm64-node-8-release:
+          requires:
+            - test-darwin-arm64-node-8-release
+            - test-darwin-arm64-node-10-release
+            - test-darwin-arm64-node-11-release
+            - test-darwin-arm64-node-12-release
+            - test-darwin-arm64-node-13-release
+            - test-darwin-arm64-node-14-release
